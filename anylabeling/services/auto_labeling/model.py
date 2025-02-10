@@ -155,6 +155,7 @@ class Model(QObject):
                 filename,
             )
         )
+        logger.info(f"Downloading {download_url} to {model_abs_path}")
         if os.path.exists(model_abs_path):
             if model_abs_path.lower().endswith(".onnx"):
                 try:
@@ -174,11 +175,6 @@ class Model(QObject):
 
         # Download url
         ellipsis_download_url = download_url
-        if len(download_url) > 40:
-            ellipsis_download_url = (
-                download_url[:20] + "..." + download_url[-20:]
-            )
-        logger.info(f"Downloading {ellipsis_download_url} to {model_abs_path}")
         try:
             # Download and show progress
             def _progress(count, block_size, total_size):
